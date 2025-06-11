@@ -56,39 +56,53 @@ async function getAIInterpretation(cardName) {
     return interpretations[cardName] || "Эта карта призывает вас заглянуть внутрь себя и найти ответы на свои вопросы.";
 }
 
-async function drawCard() {
-    const resultDiv = document.querySelector('.result-content');
-    const randomCard = tarotCards[Math.floor(Math.random() * tarotCards.length)];
-    
-    // Очищаем предыдущий результат
-    resultDiv.innerHTML = '';
-    
-    // Добавляем карту с анимацией
-    const cardHTML = `
-        <div class="card-animation">
-            <h2>${randomCard.name}</h2>
-            <img src="${randomCard.image}" alt="${randomCard.name}">
-            <p>${randomCard.meaning}</p>
-        </div>
-    `;
-    resultDiv.innerHTML = cardHTML;
-    
-    // Добавляем индикатор загрузки для ИИ толкования
+async function getTarotReading() {
+    const resultMainDiv = document.getElementById('result');
+    resultMainDiv.innerHTML = '';
+
+    const resultContentDiv = document.createElement('div');
+    resultContentDiv.classList.add('result-content', 'show');
+    resultMainDiv.appendChild(resultContentDiv);
+
+    const drawnCards = [];
+    const availableCards = [...tarotCards];
+
+    let cardsHTML = '<div class="tarot-spread">';
+    for (let i = 0; i < 3; i++) {
+        if (availableCards.length === 0) break;
+        const randomIndex = Math.floor(Math.random() * availableCards.length);
+        const randomCard = availableCards.splice(randomIndex, 1)[0];
+
+        drawnCards.push(randomCard);
+
+        cardsHTML += `
+            <div class="card-display card-animation">
+                <h2>${randomCard.name}</h2>
+                <img src="${randomCard.image}" alt="${randomCard.name}">
+                <p>${randomCard.meaning}</p>
+            </div>
+        `;
+    }
+    cardsHTML += '</div>';
+    resultContentDiv.innerHTML = cardsHTML;
+
     const loadingDiv = document.createElement('div');
-    loadingDiv.innerHTML = '<div class="loading"></div> ИИ анализирует карту...';
-    resultDiv.appendChild(loadingDiv);
-    
-    // Получаем и отображаем ИИ толкование
-    const interpretation = await getAIInterpretation(randomCard.name);
+    loadingDiv.innerHTML = '<div class="loading"></div> Карты анализируют ситуацию...';
+    resultContentDiv.appendChild(loadingDiv);
+
+    let interpretationsHTML = '';
+    for (const card of drawnCards) {
+        const interpretation = await getAIInterpretation(card.name);
+        interpretationsHTML += `
+            <div class="interpretation">
+                <h3>✨ Толкование карт (${card.name}):</h3>
+                <p>${interpretation}</p>
+            </div>
+        `;
+    }
+
     loadingDiv.remove();
-    
-    const interpretationDiv = document.createElement('div');
-    interpretationDiv.className = 'interpretation';
-    interpretationDiv.innerHTML = `
-        <h3>✨ Толкование ИИ:</h3>
-        <p>${interpretation}</p>
-    `;
-    resultDiv.appendChild(interpretationDiv);
+    resultContentDiv.innerHTML += interpretationsHTML;
 }
 
 function yesNo() {
@@ -103,10 +117,9 @@ function yesNo() {
     `;
 }
 
-// Add animation to result content
-document.addEventListener('DOMContentLoaded', () => {
-    const resultContent = document.querySelector('.result-content');
-    if (resultContent) {
-        resultContent.classList.add('show');
-    }
-});
+const yesNoButtons = `
+    <div class="yes-no-buttons">
+        <button onclick="getYesNoAnswer('yes')">Да</button>
+        <button onclick="getYesNoAnswer('no')">Нет</button>
+    </div>
+`;
