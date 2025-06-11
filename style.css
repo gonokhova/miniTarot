@@ -4,6 +4,8 @@
   --primary-color: #2c1810;
   --secondary-color: #8b4513;
   --accent-color: #d4af37;
+  --button-color: #e6c88e;
+  --button-hover: #d4af37;
   --background-color: #fdf6e9;
   --card-bg: rgba(255, 255, 255, 0.95);
   --text-color: #2c1810;
@@ -59,8 +61,8 @@ h1 {
 
 button {
   padding: 15px 30px;
-  background: var(--primary-color);
-  color: var(--accent-color);
+  background: var(--button-color);
+  color: var(--primary-color);
   border: 2px solid var(--accent-color);
   border-radius: 50px;
   font-family: 'Montserrat', sans-serif;
@@ -72,7 +74,7 @@ button {
 }
 
 button:hover {
-  background: var(--accent-color);
+  background: var(--button-hover);
   color: var(--primary-color);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -183,4 +185,56 @@ img:hover {
 .footer p {
   margin: 0;
   letter-spacing: 1px;
+}
+
+.card-animation {
+  animation: cardAppear 0.8s ease-out;
+}
+
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.interpretation {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(212, 175, 55, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--accent-color);
+  animation: spin 1s ease-in-out infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

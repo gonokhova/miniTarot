@@ -41,17 +41,54 @@ const yesNoAnswers = [
     "Очень сомнительно"
 ];
 
-function drawCard() {
+async function getAIInterpretation(cardName) {
+    // Имитация задержки для эффекта "думания"
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    const interpretations = {
+        "Шут": "Карта Шута говорит о том, что сейчас самое время начать что-то новое. Не бойтесь рисковать и доверьтесь своей интуиции. Возможно, вы находитесь на пороге важных перемен.",
+        "Маг": "Маг указывает на вашу способность воплощать мечты в реальность. У вас есть все необходимые инструменты и навыки для достижения целей. Время действовать!",
+        "Верховная Жрица": "Верховная Жрица призывает вас прислушаться к своему внутреннему голосу. Ваша интуиция сейчас особенно сильна. Доверьтесь ей в принятии важных решений.",
+        "Императрица": "Карта Императрицы символизирует изобилие и творчество. Это время для роста, процветания и реализации ваших творческих идей.",
+        "Император": "Император говорит о необходимости структуры и контроля. Возможно, вам нужно проявить больше решительности и взять ситуацию в свои руки."
+    };
+    
+    return interpretations[cardName] || "Эта карта призывает вас заглянуть внутрь себя и найти ответы на свои вопросы.";
+}
+
+async function drawCard() {
     const resultDiv = document.querySelector('.result-content');
     const randomCard = tarotCards[Math.floor(Math.random() * tarotCards.length)];
     
-    resultDiv.innerHTML = `
-        <h2>${randomCard.name}</h2>
-        <img src="${randomCard.image}" alt="${randomCard.name}">
-        <p>${randomCard.meaning}</p>
-    `;
+    // Очищаем предыдущий результат
+    resultDiv.innerHTML = '';
     
-    resultDiv.classList.add('show');
+    // Добавляем карту с анимацией
+    const cardHTML = `
+        <div class="card-animation">
+            <h2>${randomCard.name}</h2>
+            <img src="${randomCard.image}" alt="${randomCard.name}">
+            <p>${randomCard.meaning}</p>
+        </div>
+    `;
+    resultDiv.innerHTML = cardHTML;
+    
+    // Добавляем индикатор загрузки для ИИ толкования
+    const loadingDiv = document.createElement('div');
+    loadingDiv.innerHTML = '<div class="loading"></div> ИИ анализирует карту...';
+    resultDiv.appendChild(loadingDiv);
+    
+    // Получаем и отображаем ИИ толкование
+    const interpretation = await getAIInterpretation(randomCard.name);
+    loadingDiv.remove();
+    
+    const interpretationDiv = document.createElement('div');
+    interpretationDiv.className = 'interpretation';
+    interpretationDiv.innerHTML = `
+        <h3>✨ Толкование ИИ:</h3>
+        <p>${interpretation}</p>
+    `;
+    resultDiv.appendChild(interpretationDiv);
 }
 
 function yesNo() {
@@ -59,11 +96,11 @@ function yesNo() {
     const randomAnswer = yesNoAnswers[Math.floor(Math.random() * yesNoAnswers.length)];
     
     resultDiv.innerHTML = `
-        <h2>Ответ карт:</h2>
-        <p class="answer">${randomAnswer}</p>
+        <div class="card-animation">
+            <h2>Ответ карт:</h2>
+            <p class="answer">${randomAnswer}</p>
+        </div>
     `;
-    
-    resultDiv.classList.add('show');
 }
 
 // Add animation to result content
@@ -73,29 +110,3 @@ document.addEventListener('DOMContentLoaded', () => {
         resultContent.classList.add('show');
     }
 });
-
-async function getAIInterpretation(cardName) {
-  const apiKey = "7876942204:AAHjs9Px4CkRoqjPrIwPy1KAOZmJPg-iCVk"; 
-  const prompt = `Расшифруй карту Таро "${cardName}" как профессиональный таролог.`;
-
-  try {
-    const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
-      {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 150
-      },
-      {
-        headers: {
-          "Authorization": `Bearer ${apiKey}`,
-          "Content-Type": "application/json"
-        }
-      }
-    );
-    return response.data.choices[0].message.content;
-  } catch (error) {
-    console.error("Ошибка API:", error);
-    return "Не удалось получить толкование.";
-  }
-}
