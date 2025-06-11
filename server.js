@@ -1,7 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 
-// Твой токен от BotFather (замени!)
 const token = '7876942204:AAHjs9Px4CkRoqjPrIwPy1KAOZmJPg-iCVk';
 const bot = new TelegramBot(token, { polling: true });
 
