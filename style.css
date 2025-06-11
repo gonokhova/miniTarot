@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
 
 :root {
-  --primary-color: #2c1810;
-  --secondary-color: #8b4513;
-  --accent-color: #d4af37;
-  --button-color: #e6c88e;
-  --button-hover: #d4af37;
-  --background-color: #fdf6e9;
-  --card-bg: rgba(255, 255, 255, 0.95);
-  --text-color: #2c1810;
+  --primary-color: rgb(187, 85, 71); /* Reddish-brown for main text/outline */
+  --secondary-color: rgb(187, 85, 71); /* Similar for general text */
+  --accent-color: rgb(243, 150, 137); /* Muted pinkish-red for accents */
+  --button-color: rgb(243, 150, 137); /* Button background */
+  --button-hover: rgb(187, 85, 71); /* Button hover state */
+  --background-color: rgb(250, 237, 227); /* Light peach/pink background */
+  --card-bg: rgb(250, 237, 227); /* Card background, similar to body */
+  --text-color: rgb(187, 85, 71); /* Text color */
 }
 
 body {
   font-family: 'Montserrat', sans-serif;
   background: var(--background-color);
-  background-image: url('https://www.transparenttextures.com/patterns/old-map.png');
+  background-image: none; /* Remove background image */
   min-height: 100vh;
   margin: 0;
   padding: 20px;
@@ -26,11 +26,11 @@ body {
   margin: 40px auto;
   background: var(--card-bg);
   padding: 40px;
-  border-radius: 20px;
+  border-radius: 10px; /* Softer border radius */
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: none;
+  backdrop-filter: none;
+  border: 1px solid var(--primary-color);
 }
 
 h1 {
@@ -38,17 +38,25 @@ h1 {
   font-size: 3em;
   color: var(--primary-color);
   margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: none; /* Remove text shadow */
+}
+
+.subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2em;
+  color: var(--secondary-color);
+  margin-bottom: 30px;
+  letter-spacing: 0.5px;
 }
 
 .warning {
-  background: rgba(212, 175, 55, 0.1);
+  background: rgba(187, 85, 71, 0.1); /* Update warning background color */
   padding: 15px;
   border-radius: 10px;
   margin: 20px 0;
   font-size: 0.9em;
   color: var(--secondary-color);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(187, 85, 71, 0.3); /* Update warning border color */
 }
 
 .menu {
@@ -63,7 +71,7 @@ button {
   padding: 15px 30px;
   background: var(--button-color);
   color: var(--primary-color);
-  border: 2px solid var(--accent-color);
+  border: 2px solid var(--primary-color); /* Update button border color */
   border-radius: 50px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
@@ -83,15 +91,15 @@ button:hover {
 .result {
   margin-top: 30px;
   padding: 25px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(250, 237, 227, 0.8); /* Update result background */
   border-radius: 15px;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(187, 85, 71, 0.3); /* Update result border */
   transition: all 0.3s ease;
 }
 
 .result:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: none; /* Remove box shadow on hover */
 }
 
 img {
@@ -104,7 +112,7 @@ img {
 }
 
 img:hover {
-  transform: scale(1.02);
+  transform: none; /* Remove hover transform */
 }
 
 @media (max-width: 768px) {
@@ -128,39 +136,28 @@ img:hover {
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 30px;
+  /* Removed */
 }
 
 .header i {
-  font-size: 2em;
-  color: var(--accent-color);
-  animation: float 3s ease-in-out infinite;
+  /* Removed */
 }
 
 .header i:first-child {
-  animation-delay: 0s;
+  /* Removed */
 }
 
 .header i:last-child {
-  animation-delay: 1.5s;
+  /* Removed */
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  /* Removed */
 }
 
 .warning i {
   margin-right: 10px;
-  color: var(--accent-color);
+  color: var(--primary-color); /* Update warning icon color */
 }
 
 .result-content {
@@ -177,7 +174,7 @@ img:hover {
 .footer {
   margin-top: 40px;
   padding-top: 20px;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-top: 1px solid rgba(187, 85, 71, 0.2); /* Update footer border color */
   color: var(--secondary-color);
   font-size: 0.9em;
 }
@@ -205,9 +202,9 @@ img:hover {
 .interpretation {
   margin-top: 20px;
   padding: 15px;
-  background: rgba(212, 175, 55, 0.1);
+  background: rgba(187, 85, 71, 0.1); /* Update interpretation background color */
   border-radius: 10px;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(187, 85, 71, 0.3); /* Update interpretation border color */
   animation: fadeIn 1s ease-out;
 }
 
@@ -226,7 +223,7 @@ img:hover {
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 3px solid rgba(212, 175, 55, 0.3);
+  border: 3px solid rgba(187, 85, 71, 0.3);
   border-radius: 50%;
   border-top-color: var(--accent-color);
   animation: spin 1s ease-in-out infinite;
