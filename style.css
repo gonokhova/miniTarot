@@ -39,7 +39,7 @@ h1 {
   color: var(--primary-color);
   margin-bottom: 20px;
   text-shadow: none; /* Remove text shadow */
-  text-align: left; /* Align to the left */
+  text-align: center; /* Align to the center */
 }
 
 .subtitle {
@@ -48,7 +48,7 @@ h1 {
   color: var(--secondary-color);
   margin-bottom: 30px;
   letter-spacing: 0.5px;
-  text-align: left; /* Align to the left */
+  text-align: center; /* Align to the center */
 }
 
 .warning {
@@ -87,7 +87,7 @@ button:hover {
   background: var(--button-hover);
   color: var(--primary-color);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: none; /* Remove box shadow on hover */
 }
 
 .result {
@@ -107,9 +107,9 @@ button:hover {
 img {
   max-width: 100%;
   height: auto;
-  border-radius: 15px;
+  border-radius: 0; /* Remove border-radius */
   margin: 20px 0;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: none; /* Remove box-shadow */
   transition: transform 0.3s ease;
 }
 
@@ -158,8 +158,7 @@ img:hover {
 }
 
 .warning i {
-  margin-right: 10px;
-  color: var(--primary-color); /* Update warning icon color */
+  /* Removed */
 }
 
 .result-content {
