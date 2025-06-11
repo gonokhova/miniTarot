@@ -39,6 +39,7 @@ h1 {
   color: var(--primary-color);
   margin-bottom: 20px;
   text-shadow: none; /* Remove text shadow */
+  text-align: left; /* Align to the left */
 }
 
 .subtitle {
@@ -47,6 +48,7 @@ h1 {
   color: var(--secondary-color);
   margin-bottom: 30px;
   letter-spacing: 0.5px;
+  text-align: left; /* Align to the left */
 }
 
 .warning {
