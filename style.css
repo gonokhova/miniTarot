@@ -12,19 +12,21 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  background: var(--background-color);
-  background-image: none; /* Remove background image */
+  font-family: 'Cinzel', serif;
+  background-color: #F8F5EE; /* Бежево-белый цвет фона */
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   margin: 0;
   padding: 20px;
-  color: var(--text-color);
+  box-sizing: border-box;
 }
 
 .container {
   max-width: 800px;
   margin: 40px auto;
-  background: var(--card-bg);
+  background: var(--background-color);
   padding: 40px;
   border-radius: 10px; /* Softer border radius */
   text-align: center;
@@ -58,7 +60,7 @@ h1 {
   margin: 20px 0;
   font-size: 0.9em;
   color: var(--secondary-color);
-  border: 1px solid rgba(187, 85, 71, 0.3); /* Update warning border color */
+  border: 1px solid rgba(187, 85, 71, 0.3); /* Обновление границы предупреждения */
 }
 
 .menu {
@@ -69,25 +71,28 @@ h1 {
   flex-wrap: wrap;
 }
 
-button {
-  padding: 15px 30px;
-  background: var(--button-color);
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color); /* Update button border color */
-  border-radius: 50px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 1.1em;
+.menu button {
+  background: white; /* Изначально белый фон */
+  color: var(--primary-color); /* Текст цвета primary-color */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 200px;
+  margin: 5px;
+  border: 1px solid var(--primary-color); /* Добавляем рамку для видимости на белом фоне */
 }
 
-button:hover {
-  background: var(--button-hover);
-  color: var(--primary-color);
+.menu button:hover {
+  background: var(--primary-color); /* При наведении заливаем primary-color */
+  color: white; /* Текст становится белым */
   transform: translateY(-2px);
-  box-shadow: none; /* Remove box shadow on hover */
+}
+
+.menu button:active {
+  transform: translateY(0);
+  background: var(--primary-color); /* При нажатии заливаем primary-color */
+  color: white; /* Текст становится белым */
 }
 
 .result {
@@ -322,4 +327,80 @@ img:hover {
 .interpretation p {
   font-size: 0.9em;
   color: var(--secondary-color);
+}
+
+.general-interpretation {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(187, 85, 71, 0.15);
+    border-radius: 15px;
+    border: 1px solid rgba(187, 85, 71, 0.4);
+    animation: fadeIn 1s ease-out;
+}
+
+.general-interpretation h3 {
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.general-interpretation p {
+    color: var(--secondary-color);
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.general-interpretation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.general-interpretation li {
+    color: var(--secondary-color);
+    margin: 10px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.general-interpretation li:before {
+    content: "✨";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.tarot-card {
+    flex: 0 0 auto;
+    width: 150px; /* Adjust as needed */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tarot-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tarot-card h3 {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: var(--primary-color);
+}
+
+.tarot-card p {
+    font-size: 0.9em;
+    color: var(--text-color);
+    line-height: 1.4;
 }
